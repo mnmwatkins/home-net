@@ -5,6 +5,13 @@ import { check } from 'meteor/check';
 export const Tasks = new Mongo.Collection('tasks');
 export const MQTT = new Mongo.Collection('mqtt');
 
+Router.route('/', {
+    name: 'home',
+    template: 'home',
+});
+Router.route('/register');
+Router.route('/tasklist');
+
 if (Meteor.isServer) {
     //code only runs on server
     Meteor.publish('tasks',function tasksPublication() {

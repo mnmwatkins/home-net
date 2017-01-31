@@ -1,15 +1,17 @@
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Tasks } from '../api/tasks.js';
-import './task.js';
-import './body.html';
+import './task.js'; //task list template for each task displayed.
+import './header.html'
+import './tasklist.html';
 
-Template.body.onCreated(function bodyOnCreated() {
+
+Template.tasklist.onCreated(function taskListOnCreated() {
     this.state = new ReactiveDict();
     Meteor.subscribe('tasks');
 });
 
-Template.body.helpers({
+Template.tasklist.helpers({
     tasks() {
         const instance = Template.instance();
         if (instance.state.get('hideCompleted')) {
@@ -24,7 +26,7 @@ Template.body.helpers({
     },
 });
 
-Template.body.events({
+Template.tasklist.events({
     'submit .new-task'(event) {
         // Prevent default browser form submit
         event.preventDefault();
@@ -45,4 +47,7 @@ Template.body.events({
     'change .toggleOutlet'(event) {
         Meteor.call('mqtt.send',event.target.id,event.target.checked);
     },
+    ''(event) {
+        console.log(event);
+    }
 })
