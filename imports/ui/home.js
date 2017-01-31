@@ -1,2 +1,2 @@
-import './header.html';
+import './header.js';
 import './home.html'; //template

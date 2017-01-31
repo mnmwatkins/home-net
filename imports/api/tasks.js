@@ -9,8 +9,14 @@ Router.route('/', {
     name: 'home',
     template: 'home',
 });
-Router.route('/register');
-Router.route('/tasklist');
+Router.route('/register', {
+    name: 'register',
+    template: 'register',
+});
+Router.route('/tasklist', {
+    name: 'tasklist',
+    template: 'tasklist',
+});
 
 if (Meteor.isServer) {
     //code only runs on server
@@ -29,7 +35,6 @@ if (Meteor.isServer) {
         raw: true,
     });
 }
-
 
 Meteor.methods({
     'tasks.insert'(text) {

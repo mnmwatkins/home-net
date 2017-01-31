@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Tasks } from '../api/tasks.js';
 import './task.js'; //task list template for each task displayed.
-import './header.html'
+import './header.js'
 import './tasklist.html';
 
 

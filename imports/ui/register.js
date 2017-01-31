@@ -1,4 +1,4 @@
-import './header.html';
+import './header.js';
 import './register.html'; //template
 
 Template.register.events({
