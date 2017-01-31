@@ -1,0 +1,28 @@
+<template name="tasklist">
+    {{ > header }}
+    <div class="jumbotron">
+        <ul>
+            {{#if currentUser}}
+                <form class="navbar-form new-task">
+                    <input type="text" class="form-control" name="text" placeholder="Type to add new tasks" />
+                </form>
+            {{/if}}
+        </ul>
+        <ul>
+
+            <label class="hide-completed">
+                <input type="checkbox" data-toggle="toggleHide" /> - Hide Completed Tasks
+            </label>
+
+        </ul>
+    </div>
+
+    <div class="jumbotron">
+        <h3>Current Task List</h3><BR>
+        <ul>
+            {{#each tasks}}
+                {{> task}}
+            {{/each}}
+        </ul>
+    </div>
+</template>

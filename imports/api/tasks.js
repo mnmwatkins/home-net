@@ -5,6 +5,19 @@ import { check } from 'meteor/check';
 export const Tasks = new Mongo.Collection('tasks');
 export const MQTT = new Mongo.Collection('mqtt');
 
+Router.route('/', {
+    name: 'home',
+    template: 'home',
+});
+Router.route('/register', {
+    name: 'register',
+    template: 'register',
+});
+Router.route('/tasklist', {
+    name: 'tasklist',
+    template: 'tasklist',
+});
+
 if (Meteor.isServer) {
     //code only runs on server
     Meteor.publish('tasks',function tasksPublication() {
@@ -22,7 +35,6 @@ if (Meteor.isServer) {
         raw: true,
     });
 }
-
 
 Meteor.methods({
     'tasks.insert'(text) {
