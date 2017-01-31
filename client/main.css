@@ -1,0 +1,23 @@
+/* CSS declarations go here */
+#login-buttons {
+  display: block;
+}
+li.checked {
+  color: #888;
+}
+
+li.checked .text {
+  text-decoration: line-through;
+}
+.delete {
+  float: right;
+  font-weight: bold;
+  background: none;
+  font-size: 1em;
+  border: none;
+  position: relative;
+}
+li.private {
+  background: #eee;
+  border-color: #ddd;
+}

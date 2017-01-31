@@ -1,0 +1,45 @@
+<body>
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Home Net</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                {{#if currentUser}}
+                    <form class="navbar-form new-task">
+                        <input type="text" class="form-control" name="text" placeholder="Type to add new tasks" />
+                    </form>
+                {{/if}}
+            </ul>
+            <ul class="nav navbar-nav">
+                <label class="hide-completed">
+                    <input type="checkbox" data-toggle="toggleHide" /> - Hide Completed Tasks
+                </label>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+    			{{> loginButtons}} <!-- here -->
+    		</ul>
+
+        </div>
+    </div>
+
+    <div class="jumbotron">
+        <ul>
+            <input type="checkbox" class="toggleOutlet" id="0/0" data-toggle="toggle" /> - Outlet:0:0
+        </ul>
+        <ul>
+            <input type="checkbox" class="toggleOutlet" id="0/1" data-toggle="toggle" /> - Outlet:0:1
+        </ul>
+        <ul>
+            <input type="checkbox" class="toggleOutlet" id="1/0" data-toggle="toggle" /> - Outlet:1:0
+        </ul>
+        <ul>
+            <input type="checkbox" class="toggleOutlet" id="1/1" data-toggle="toggle" /> - Outlet:1:1
+        </ul>
+        <ul>
+            {{#each tasks}}
+                {{> task}}
+            {{/each}}
+        </ul>
+    </div>
+</body>
