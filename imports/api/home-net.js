@@ -12,10 +12,19 @@ Router.route('/', {
 Router.route('/register', {
     name: 'register',
     template: 'register',
+    data: function() {
+            //console.log("opened register");
+            //console.log(this.el)
+            //ToggleButton = $(Template.register.find("#toggleOutlet"));
+            //console.log(Template.register.ToggleButton);
+    },
 });
 Router.route('/tasklist', {
     name: 'tasklist',
     template: 'tasklist',
+    data: function() {
+        console.log("opened tasklist");
+    },
 });
 
 if (Meteor.isServer) {
