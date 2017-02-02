@@ -3,10 +3,7 @@ import './register.html'; //template
 
 
 Template.register.rendered = function() {
-    var el = $("checkbox");
-    console.log(el);
-    el.removeClass('toggleOutlet');
-    el.addClass('toggleOutlet');
+    console.log("back in register page.");
 };
 
 Template.register.events({

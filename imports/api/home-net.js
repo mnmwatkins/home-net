@@ -4,6 +4,7 @@ import { check } from 'meteor/check';
 
 export const Tasks = new Mongo.Collection('tasks');
 export const MQTT = new Mongo.Collection('mqtt');
+export const Elements = new Mongo.Collection('elements'); //the I/O IoT elements and thier current state.
 
 Router.route('/', {
     name: 'home',
@@ -13,10 +14,7 @@ Router.route('/register', {
     name: 'register',
     template: 'register',
     data: function() {
-            //console.log("opened register");
-            //console.log(this.el)
-            //ToggleButton = $(Template.register.find("#toggleOutlet"));
-            //console.log(Template.register.ToggleButton);
+            console.log("opened register");
     },
 });
 Router.route('/tasklist', {
@@ -26,6 +24,11 @@ Router.route('/tasklist', {
         console.log("opened tasklist");
     },
 });
+Router.route('/configure', {
+    name: 'configure',
+    template: 'configure',
+});
+
 
 if (Meteor.isServer) {
     //code only runs on server
