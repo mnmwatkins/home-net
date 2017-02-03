@@ -2,65 +2,53 @@
     {{ > header }}
     <BR><BR><BR>
     <div class="well">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean lacinia bibendum nulla sed consectetur.</p>
+        <p>
+            This is where you will enter the IoT elements.  You will need to know the MQTT topic for each element to
+            add it to the available list.
+        </p>
     </div>
     <div class="page-header">
-  <h1>Panels</h1>
-</div>
-<div class="row">
-  <div class="col-sm-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Panel title</h3>
-      </div>
-      <div class="panel-body">
-        Panel content
-      </div>
+        <h2>Element Data Entry</h2>
     </div>
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">Panel title</h3>
-      </div>
-      <div class="panel-body">
-        Panel content
-      </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Enter Topic</h3>
+                </div>
+                <div class="panel-body">
+                    {{#if currentUser}}
+                        <form class="navbar-form new-topic">
+                            <input type="text" style="width:100%" class="form-control" name="text" placeholder="Type to add new topic (ie. /outlet/status/0/0)" />
+                        </form>
+                    {{/if}}
+                </div>
+            </div>
+        </div><!-- /.col-sm-4 -->
+        <div class="col-sm-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Enter Description</h3>
+                </div>
+                <div class="panel-body">
+                    {{#if currentUser}}
+                        <form class="navbar-form new-description">
+                            <input type="text" style="width:100%" class="form-control" name="text" placeholder="Type a description (ie. Main Floor Lights)" />
+                        </form>
+                    {{/if}}
+                </div>
+            </div>
+        </div><!-- /.col-sm-4 -->
+        <div class="col-sm-4">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Save Element</h3>
+                </div>
+                <div class="panel-body" align="center">
+                    <button type="button" class="btn btn-lg btn-primary save-element">Save</button>
+                </div>
+            </div>
+        </div><!-- /.col-sm-4 -->
     </div>
-  </div><!-- /.col-sm-4 -->
-  <div class="col-sm-4">
-    <div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">Panel title</h3>
-      </div>
-      <div class="panel-body">
-        Panel content
-      </div>
-    </div>
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <h3 class="panel-title">Panel title</h3>
-      </div>
-      <div class="panel-body">
-        Panel content
-      </div>
-    </div>
-  </div><!-- /.col-sm-4 -->
-  <div class="col-sm-4">
-    <div class="panel panel-warning">
-      <div class="panel-heading">
-        <h3 class="panel-title">Panel title</h3>
-      </div>
-      <div class="panel-body">
-        Panel content
-      </div>
-    </div>
-    <div class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title">Panel title</h3>
-      </div>
-      <div class="panel-body">
-        Panel content
-      </div>
-    </div>
-  </div><!-- /.col-sm-4 -->
-</div>
 </template>
