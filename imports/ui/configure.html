@@ -1,27 +1,40 @@
 <template name="configure">
     {{ > header }}
+    {{ > bertAlert }} <!--allow an alert diaglog if form not filled out correctly. -->
     <BR><BR><BR>
     <div class="well">
         <p>
             This is where you will enter the IoT elements.  You will need to know the MQTT topic for each element to
             add it to the available list.
         </p>
+        <p>
+            More directions if needed..
+        </p>
     </div>
     <div class="page-header">
         <h2>Element Data Entry</h2>
     </div>
-
+<form class="new-element">
     <div class="row">
         <div class="col-sm-4">
-            <div class="panel panel-default">
+            <div class="panel panel-success">
                 <div class="panel-heading">
                     <h3 class="panel-title">Enter Topic</h3>
                 </div>
                 <div class="panel-body">
                     {{#if currentUser}}
-                        <form class="navbar-form new-topic">
-                            <input type="text" style="width:100%" class="form-control" name="text" placeholder="Type to add new topic (ie. /outlet/status/0/0)" />
-                        </form>
+                        <input type="text" style="width:100%" class="new-topic" name="topic" placeholder="Type to add new topic (ie. /outlet/status/0/0)" />
+                    {{/if}}
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Enter Point Data Type</h3>
+                </div>
+                <div class="panel-body">
+                    {{#if currentUser}}
+                        <input type="radio" name="type" value="output" checked> Output (ie. relay)<BR>
+                        <input type="radio" name="type" value="input"> Input (ie. switch)
                     {{/if}}
                 </div>
             </div>
@@ -33,22 +46,32 @@
                 </div>
                 <div class="panel-body">
                     {{#if currentUser}}
-                        <form class="navbar-form new-description">
-                            <input type="text" style="width:100%" class="form-control" name="text" placeholder="Type a description (ie. Main Floor Lights)" />
-                        </form>
+                        <input type="text" style="width:100%" class="new-description" name="description" placeholder="Type a description (ie. Main Floor Lights)" />
+                    {{/if}}
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Enter Point Data Signal</h3>
+                </div>
+                <div class="panel-body">
+                    {{#if currentUser}}
+                        <input type="radio" name="signal" value="digitial" checked> Digital (ie. switch, relay, etc.)<BR>
+                        <input type="radio" name="signal" value="analog"> Analog (ie. temperature, etc.)<br>
                     {{/if}}
                 </div>
             </div>
         </div><!-- /.col-sm-4 -->
         <div class="col-sm-4">
-            <div class="panel panel-warning">
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">Save Element</h3>
                 </div>
                 <div class="panel-body" align="center">
-                    <button type="button" class="btn btn-lg btn-primary save-element">Save</button>
+                    <button type="submit" class="btn btn-lg btn-primary save-element">Save</button>
                 </div>
             </div>
         </div><!-- /.col-sm-4 -->
     </div>
+</form>
 </template>

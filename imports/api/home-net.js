@@ -49,6 +49,23 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
+    'element.insert'(topic,description,type,signal) {
+        check(topic,String);
+        check(description,String);
+        check(type,String);
+        check(signal,String);
+
+        if (! this.userId) { //Logged in?
+            throw new Meteor.Error('Not-Authorized');
+        }
+
+        Elements.insert({
+            text,
+            createdAt: new Date(),
+            owner: this.userId,
+            username: Meteor.users.findOne(this.userId).username,
+        });
+    },
     'tasks.insert'(text) {
         check(text,String);
 

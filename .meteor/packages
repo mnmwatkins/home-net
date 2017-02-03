@@ -27,3 +27,5 @@ stylus
 accounts-password
 ian:accounts-ui-bootstrap-3
 iron:router
+themeteorchef:bert
+session
