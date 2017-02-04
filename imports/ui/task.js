@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { Tasks } from '../api/tasks.js'; //Task collection
+import { Tasks } from '../api/home-net.js'; //Task collection
 import './task.html'; //template
 
 Template.task.helpers({
