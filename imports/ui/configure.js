@@ -7,18 +7,25 @@ import './configure.html'; //Template for configure page/route.
 
 //This will disable the enter key on the text fields from triggering the submit event.
 $(document).ready(function() {
-  $(window).keydown(function(event){
-    if(event.keyCode == 13) {
-      event.preventDefault();
-      return false;
-    }
-  });
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+        }
+    });
 });
 
-Template.configure.onCreated(function taskListOnCreated() {
+Template.configure.onCreated(function configureOnCreated() {
     this.state = new ReactiveDict();
     Meteor.subscribe('elements');
-})
+});
+
+Template.configure.helpers({
+    elements() {
+        return Elements.find({}, {sort: {createdAt: -1} });
+    },
+});
+
 
 Template.configure.events({
     'submit .new-element'(event) {
@@ -36,12 +43,6 @@ Template.configure.events({
             Bert.alert( 'You must enter: Topic and Description', 'danger', 'fixed-top', 'fa-frown-o' );
             return;
         }
-
-        console.log(topic);
-        console.log(description);
-        console.log(type);
-        console.log(signal);
-
 
         // Insert a element into the collection (see home-net.js)
         Meteor.call('element.insert', topic,description,type,signal);

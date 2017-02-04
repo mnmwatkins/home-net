@@ -40,6 +40,9 @@ if (Meteor.isServer) {
             ],
         });
     });
+    Meteor.publish('elements',function elementsPublication() {
+        return Elements.find({});
+    });
 
     MQTT.mqttConnect("mqtt://localhost", {
     //MQTT.mqttConnect("mqtt://192.168.1.3", {
@@ -56,21 +59,37 @@ Meteor.methods({
         check(signal,String);
 
         if (! this.userId) { //Logged in?
-            throw new Meteor.Error('Not-Authorized');
+            throw new Meteor.Error('not-authorized');
         }
-
-        Elements.insert({
-            text,
-            createdAt: new Date(),
-            owner: this.userId,
-            username: Meteor.users.findOne(this.userId).username,
+        Elements.upsert({ //Insert or update topics or elements.
+            // Selector
+                topic: topic,
+            }, {
+            // Modifier
+            $set: {
+                description: description,
+                type: type,
+                signal: signal,
+                status: null,
+                owner: this.userId,
+                username: Meteor.users.findOne(this.userId).username,
+                createdAt: Date.now() // no need coma here
+            }
         });
+    },
+    'elements.remove'(elementId) {
+        check(elementId,String);
+        if (! this.userId) {
+            //if it is private, make sure only the ownder can delete
+            throw new Meteor.Error('not-authorized');
+        }
+        Elements.remove(elementId);
     },
     'tasks.insert'(text) {
         check(text,String);
 
         if (! this.userId) { //Logged in?
-            throw new Meteor.Error('Not-Authorized');
+            throw new Meteor.Error('not-authorized');
         }
 
         Tasks.insert({
