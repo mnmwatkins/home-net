@@ -13,9 +13,11 @@ MQTT.mqttConnect("mqtt://localhost", ["/+/status/+/+"], {}, {}); //Format for st
 MQTT.find().observe({
     added: function (document) {
         // Do something if needed..this will change when a element is turned on or any published data is changed.
+        //console.log('got an add..')
     },
     changed: function (newStatus, oldStatus) { //This will only change if something is updated..so it would miss the first time.
         const updateTopic = newStatus.topic.replace("status/",""); //Find root topic..and update it's status
+        //console.log("updateTopic: " + updateTopic);
         Elements.update(
             {topic: updateTopic},
             {$set:
@@ -25,5 +27,6 @@ MQTT.find().observe({
     },
     removed: function (oldStatus) {
         // This will change when an element is turned on or off; it caused an add the immediate remove.
+        //console.log('got a remove...')
     }
 });

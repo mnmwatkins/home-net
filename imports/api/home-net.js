@@ -135,15 +135,16 @@ Meteor.methods({
         if (!this.userId) { //actually logged in; throw error..
             throw new Meteor.Error('not-authorized');
         }
-        const currentStatus = Elements.findOne(topicId)
+        const currentStatus = Elements.findOne(topicId);
         var mqttTopic = topic;
 
-        if (currentStatus.status === null) { //newly defined element, not set yet so force off; then turn on..just in case it was left in a strange state.
+        if (currentStatus.status === null) { //newly defined element, not set yet so force off; then turn allow on..just in case it was left in a strange state.
             MQTT.insert({
               topic: mqttTopic,
               message: "OFF",
               broadcast: true,
             });
+            Elements.update(topicId, {$set: {status: 'OFF'}}); //force a status
             return; //Just leave to ensure set up correctly.
         }
 
