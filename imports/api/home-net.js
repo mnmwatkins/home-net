@@ -14,14 +14,14 @@ Router.route('/register', {
     name: 'register',
     template: 'register',
     data: function() {
-            console.log("opened register");
+            //console.log("opened register");
     },
 });
 Router.route('/tasklist', {
     name: 'tasklist',
     template: 'tasklist',
     data: function() {
-        console.log("opened tasklist");
+        //console.log("opened tasklist");
     },
 });
 Router.route('/configure', {
@@ -131,14 +131,24 @@ Meteor.methods({
 
         Tasks.update(taskId, {$set: {private: setToPrivate}});
     },
-    'mqtt.send'(feedId,sendChecked) {
+    'mqtt.send'(topicId,topic) {
         if (!this.userId) { //actually logged in; throw error..
             throw new Meteor.Error('not-authorized');
         }
+        const currentStatus = Elements.findOne(topicId)
+        var mqttTopic = topic;
 
-        var mqttTopic = "/outlet/" + feedId;
+        if (currentStatus.status === null) { //newly defined element, not set yet so force off; then turn on..just in case it was left in a strange state.
+            MQTT.insert({
+              topic: mqttTopic,
+              message: "OFF",
+              broadcast: true,
+            });
+            return; //Just leave to ensure set up correctly.
+        }
+
         var mqttMessage = "ON";
-        if (!sendChecked) {
+        if (currentStatus.status === "ON") {
             mqttMessage = "OFF";
         }
         MQTT.insert({

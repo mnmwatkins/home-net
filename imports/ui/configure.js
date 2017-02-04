@@ -53,13 +53,4 @@ Template.configure.events({
         target.type.value = 'output';
         target.signal.value = 'digital';
     },
-    'change .hide-completed input'(event, instance) {
-        instance.state.set('hideCompleted', event.target.checked);
-    },
-    'change .toggleOutlet'(event) {
-        Meteor.call('mqtt.send',event.target.id,event.target.checked);
-    },
-    ''(event) {
-        console.log(event);
-    }
 })
