@@ -6,8 +6,6 @@ export const Tasks = new Mongo.Collection('tasks');
 export const MQTT = new Mongo.Collection('mqtt');
 export const Elements = new Mongo.Collection('elements'); //the I/O IoT elements and thier current state.
 
-export const IOT = new Mongo.Collection('mqtt-iot');
-
 Router.route('/', {
     name: 'home',
     template: 'home',

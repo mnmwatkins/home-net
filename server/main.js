@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { MQTT } from '../imports/api/home-net.js';
 import { Elements } from '../imports/api/home-net.js';
-import { IOT } from '../imports/api/home-net.js';
 
 import '../imports/api/home-net.js'
 
