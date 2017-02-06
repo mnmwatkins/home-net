@@ -20,9 +20,6 @@ Router.route('/modify', {
 Router.route('/tasklist', {
     name: 'tasklist',
     template: 'tasklist',
-    data: function() {
-        //console.log("opened tasklist");
-    },
 });
 Router.route('/configure', {
     name: 'configure',
