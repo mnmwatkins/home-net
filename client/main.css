@@ -22,3 +22,9 @@ li.private {
   background: #eee;
   border-color: #ddd;
 }
+
+div.status {
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+}
