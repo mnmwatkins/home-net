@@ -5,7 +5,7 @@ import decimal
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
-	print("Connected with result code "+str(rc))
+	#print("Connected with result code "+str(rc))
 
 	# Subscribing in on_connect() means that if we lose the connection and
 	# reconnect then subscriptions will be renewed.
@@ -20,15 +20,14 @@ def on_message(client, userdata, msg):
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
-
 client.connect("localhost", 1883, 60)
 
 # Blocking call that processes network traffic, dispatches callbacks and
 # handles reconnecting.
 # Other loop*() functions are available that give a threaded interface and a
 # manual interface.
-#client.loop_forever()
 
+#client.loop_forever()
 client.loop_start()
 temp = 12;
 switchStatus = "OFF";
@@ -40,8 +39,8 @@ while True:
 		switchStatus = "OFF"
 
 	client.publish("/switch/status/0/0",switchStatus)
+
 	tempMessage = "{0:.2f}".format(random.uniform(68,100))
 	client.publish("/temperature/status/0/0",tempMessage)
 
-
-	time.sleep(5)
+	time.sleep(3)
