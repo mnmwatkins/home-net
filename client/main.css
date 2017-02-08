@@ -28,3 +28,10 @@ div.status {
     text-align: center;
     font-weight: bold;
 }
+
+div.frontDoor {
+    position: absolute;
+    top: 630px;
+    left: 255px;
+    text-align: center;
+}

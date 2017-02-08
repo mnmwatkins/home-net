@@ -25,6 +25,10 @@ Router.route('/configure', {
     name: 'configure',
     template: 'configure',
 });
+Router.route('/mainfloor', {
+    name: 'mainfloor',
+    template: 'mainfloor',
+});
 
 
 if (Meteor.isServer) {
