@@ -25,7 +25,11 @@ Template.mainfloor.helpers({
         return Elements.find({ $and: [ {type: { $eq: 'input' }}, {signal: {$eq: 'analog'}} ]}, {sort: {createdAt: -1} });
     },
     if_open(topic,status) {
-        //This is where I define the topic to be equivalent to a location; should be configured in DB, but it is hard coded for now.
+        /* WARNING..
+        //This is where I define the topic to be equivalent to a location;
+        //this should really be configured in collection, but it is hard coded for now.
+          YOU HAVE BEEN WARNED.
+        */
         if (topic === '/switch/0/0') { //front door.
             if (status == 'OFF') {
                 return('<td><div class="frontDoor" style="background-color: red">DOOR<BR>(OPENED)</div></td>');
