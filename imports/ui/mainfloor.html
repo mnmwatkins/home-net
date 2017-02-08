@@ -1,0 +1,11 @@
+<template name="mainfloor">
+    {{ > header }}
+    {{ > bertAlert }} <!--allow an alert diaglog -->
+    <BR><BR>
+    <div style="position: absolute; top: 0px; left: 0px">
+        <img src="/MainFloorLayout.png">
+        {{#each elements_monitor}}
+            {{{if_open topic status}}}
+        {{/each}}
+    </div>
+</template>
