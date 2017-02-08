@@ -4,6 +4,7 @@ import { check } from 'meteor/check';
 
 export const Tasks = new Mongo.Collection('tasks');
 export const MQTT = new Mongo.Collection('mqtt');
+export const Elements = new Mongo.Collection('elements'); //the I/O IoT elements and thier current state.
 
 Router.route('/', {
     name: 'home',
@@ -12,11 +13,22 @@ Router.route('/', {
 Router.route('/register', {
     name: 'register',
     template: 'register',
+    data: function() {
+            //console.log("opened register");
+    },
 });
 Router.route('/tasklist', {
     name: 'tasklist',
     template: 'tasklist',
+    data: function() {
+        //console.log("opened tasklist");
+    },
 });
+Router.route('/configure', {
+    name: 'configure',
+    template: 'configure',
+});
+
 
 if (Meteor.isServer) {
     //code only runs on server
@@ -28,6 +40,9 @@ if (Meteor.isServer) {
             ],
         });
     });
+    Meteor.publish('elements',function elementsPublication() {
+        return Elements.find({});
+    });
 
     MQTT.mqttConnect("mqtt://localhost", {
     //MQTT.mqttConnect("mqtt://192.168.1.3", {
@@ -37,11 +52,44 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
+    'element.insert'(topic,description,type,signal) {
+        check(topic,String);
+        check(description,String);
+        check(type,String);
+        check(signal,String);
+
+        if (! this.userId) { //Logged in?
+            throw new Meteor.Error('not-authorized');
+        }
+        Elements.upsert({ //Insert or update topics or elements.
+            // Selector
+                topic: topic,
+            }, {
+            // Modifier
+            $set: {
+                description: description,
+                type: type,
+                signal: signal,
+                status: null,
+                owner: this.userId,
+                username: Meteor.users.findOne(this.userId).username,
+                createdAt: Date.now() // no need coma here
+            }
+        });
+    },
+    'elements.remove'(elementId) {
+        check(elementId,String);
+        if (! this.userId) {
+            //if it is private, make sure only the ownder can delete
+            throw new Meteor.Error('not-authorized');
+        }
+        Elements.remove(elementId);
+    },
     'tasks.insert'(text) {
         check(text,String);
 
         if (! this.userId) { //Logged in?
-            throw new Meteor.Error('Not-Authorized');
+            throw new Meteor.Error('not-authorized');
         }
 
         Tasks.insert({
@@ -83,14 +131,24 @@ Meteor.methods({
 
         Tasks.update(taskId, {$set: {private: setToPrivate}});
     },
-    'mqtt.send'(feedId,sendChecked) {
+    'mqtt.send'(topicId,topic) {
         if (!this.userId) { //actually logged in; throw error..
             throw new Meteor.Error('not-authorized');
         }
+        const currentStatus = Elements.findOne(topicId)
+        var mqttTopic = topic;
 
-        var mqttTopic = "/outlet/" + feedId;
+        if (currentStatus.status === null) { //newly defined element, not set yet so force off; then turn on..just in case it was left in a strange state.
+            MQTT.insert({
+              topic: mqttTopic,
+              message: "OFF",
+              broadcast: true,
+            });
+            return; //Just leave to ensure set up correctly.
+        }
+
         var mqttMessage = "ON";
-        if (!sendChecked) {
+        if (currentStatus.status === "ON") {
             mqttMessage = "OFF";
         }
         MQTT.insert({

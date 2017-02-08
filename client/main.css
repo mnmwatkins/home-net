@@ -17,6 +17,7 @@ li.checked .text {
   border: none;
   position: relative;
 }
+
 li.private {
   background: #eee;
   border-color: #ddd;

@@ -19,7 +19,6 @@ ecmascript@0.6.1              # Enable ECMAScript2015+ syntax in app code
 shell-server@0.2.1            # Server-side component of the `meteor shell` command
 
 reactive-dict
-accounts-google
 perak:mqtt-collection
 twbs:bootstrap
 jiku:bootstrap-toggle
@@ -27,3 +26,5 @@ stylus
 accounts-password
 ian:accounts-ui-bootstrap-3
 iron:router
+themeteorchef:bert
+session
