@@ -22,3 +22,35 @@ li.private {
   background: #eee;
   border-color: #ddd;
 }
+
+div.status {
+    width: 40%;
+    text-align: center;
+    font-weight: bold;
+}
+
+div.frontDoor {
+    position: absolute;
+    top: 630px;
+    left: 255px;
+    text-align: center;
+}
+div.motionSensor {
+    position: absolute;
+    top: 120px;
+    left: 345px;
+    text-align: center;
+}
+
+div.outlet00 {
+    position: absolute;
+    top: 195px;
+    left: 200px;
+    text-align: center;
+}
+div.outlet01 {
+    position: absolute;
+    top: 215px;
+    left: 200px;
+    text-align: center;
+}

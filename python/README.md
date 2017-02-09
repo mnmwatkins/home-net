@@ -1,0 +1,1 @@
+This is a directory of python scripts; mostly used for testing and emulating the Arduino/RPI communications back via MQTT broker.

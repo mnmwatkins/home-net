@@ -10,23 +10,24 @@ Router.route('/', {
     name: 'home',
     template: 'home',
 });
-Router.route('/register', {
-    name: 'register',
-    template: 'register',
+Router.route('/modify', {
+    name: 'modify',
+    template: 'modify',
     data: function() {
-            //console.log("opened register");
+            //console.log("opened modify");
     },
 });
 Router.route('/tasklist', {
     name: 'tasklist',
     template: 'tasklist',
-    data: function() {
-        //console.log("opened tasklist");
-    },
 });
 Router.route('/configure', {
     name: 'configure',
     template: 'configure',
+});
+Router.route('/mainfloor', {
+    name: 'mainfloor',
+    template: 'mainfloor',
 });
 
 
@@ -52,11 +53,12 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-    'element.insert'(topic,description,type,signal) {
+    'element.insert'(topic,description,type,signal,statusClass) {
         check(topic,String);
         check(description,String);
         check(type,String);
         check(signal,String);
+        check(statusClass,String);
 
         if (! this.userId) { //Logged in?
             throw new Meteor.Error('not-authorized');
@@ -71,6 +73,7 @@ Meteor.methods({
                 type: type,
                 signal: signal,
                 status: null,
+                statusClass: statusClass,
                 owner: this.userId,
                 username: Meteor.users.findOne(this.userId).username,
                 createdAt: Date.now() // no need coma here
@@ -135,15 +138,16 @@ Meteor.methods({
         if (!this.userId) { //actually logged in; throw error..
             throw new Meteor.Error('not-authorized');
         }
-        const currentStatus = Elements.findOne(topicId)
+        const currentStatus = Elements.findOne(topicId);
         var mqttTopic = topic;
 
-        if (currentStatus.status === null) { //newly defined element, not set yet so force off; then turn on..just in case it was left in a strange state.
+        if (currentStatus.status === null) { //newly defined element, not set yet so force off; then turn allow on..just in case it was left in a strange state.
             MQTT.insert({
               topic: mqttTopic,
               message: "OFF",
               broadcast: true,
             });
+            Elements.update(topicId, {$set: {status: 'OFF'}}); //force a status
             return; //Just leave to ensure set up correctly.
         }
 

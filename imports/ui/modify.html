@@ -1,0 +1,88 @@
+<template name="modify">
+    {{ > header }}
+    {{ > bertAlert }} <!--allow an alert diaglog -->
+    <BR><BR>
+    <div class="jumbotron">
+        <h2 class="sub-header">Defined Elements - You can modify.</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Topic</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Signal</th>
+                        <th>Status</th>
+                        <th>Toggle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each elements_modify}}
+                    <tr>
+                        <td>{{topic}}</td>
+                        <td>{{description}}</td>
+                        <td>{{type}}</td>
+                        <td>{{signal}}</td>
+                        {{{if_off status}}} <!-- helper to change the color of the <td> elemnt to highlight -->
+                        <button type="submit" class="btn btn-sm btn-success toggleOutlet">Toggle</button>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="jumbotron">
+        <h2 class="sub-header">Defined Elements - You can monitor.</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Topic</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Signal</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each elements_monitor}}
+                    <tr>
+                        <td>{{topic}}</td>
+                        <td>{{description}}</td>
+                        <td>{{type}}</td>
+                        <td>{{signal}}</td>
+                        {{{if_off status}}} <!-- helper to change the color of the <td> elemnt to highlight -->
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="jumbotron">
+        <h2 class="sub-header">Defined Elements - You can watch change.</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Topic</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Signal</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each elements_analog}}
+                    <tr>
+                        <td>{{topic}}</td>
+                        <td>{{description}}</td>
+                        <td>{{type}}</td>
+                        <td>{{signal}}</td>
+                        <td>{{status}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>
