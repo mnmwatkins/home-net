@@ -63,6 +63,16 @@
                 </div>
             </div><!-- /.col-sm-4 -->
             <div class="col-sm-4">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Enter Class for Status (Input Elements - Optional)</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{#if currentUser}}
+                            <input type="text" style="width:100%" class="new-class" name="statusClass" placeholder="Enter the class reference for status page (ie. frontDoor)" />
+                        {{/if}}
+                    </div>
+                </div>
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title">Save or Update Element</h3>
@@ -85,6 +95,7 @@
                 <th>Description</th>
                 <th>Type</th>
                 <th>Signal</th>
+                <th>Class</th>
                 <th>Status</th>
                 <th>Delete?</th>
             </tr>

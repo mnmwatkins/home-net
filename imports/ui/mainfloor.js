@@ -15,6 +15,7 @@ Template.mainfloor.onCreated(function configureOnCreated() {
 
 Template.mainfloor.helpers({
     //Return the differnet elements..analog / outputs are not yet defined.
+    /*
     elements_modify() {
         return Elements.find({ $and: [ {type: { $eq: 'output' }}, {signal: {$eq: 'digital'}} ]}, {sort: {createdAt: -1} });
     },
@@ -24,24 +25,38 @@ Template.mainfloor.helpers({
     elements_analog() {
         return Elements.find({ $and: [ {type: { $eq: 'input' }}, {signal: {$eq: 'analog'}} ]}, {sort: {createdAt: -1} });
     },
-    if_open(topic,status) {
-        /* WARNING..
-        //This is where I define the topic to be equivalent to a location;
-        //this should really be configured in collection, but it is hard coded for now.
-          YOU HAVE BEEN WARNED.
+    */
+    elements_monitor() {
+        return Elements.find({ $and: [ {signal: {$eq: 'digital'}} ]}, {sort: {createdAt: -1} });
+    },
+    if_open(topic,status,statusClass) {
+        /*
+            The class comes from the element collections; what ever is defined there must exist in the main.class
+            file to give it a location, etc.
+            You can set up unique actions by topic or by default based only on status (ie. ON or OFF..)
         */
+        var returnTD = "";
         if (topic === '/switch/0/0') { //front door.
             if (status == 'OFF') {
-                return('<td><div class="frontDoor" style="background-color: red">DOOR<BR>(OPENED)</div></td>');
+                returnTD = "<td><div class=" + statusClass + " style='background-color: red'>DOOR<BR>(OPENED)</div></td>";
             } else {
-                return('<td><div class="frontDoor" style="background-color: lightgreen">DOOR<BR>(CLOSED)</div></td>');
+                returnTD = "<td><div class=" + statusClass + " style='background-color: lightgreen'>DOOR<BR>(CLOSED)</div></td>";
             }
         } else if (topic === '/switch/0/1') { //motion sensor
             if (status == 'OFF') {
-                return('<td><div class="motionSensor" style="background-color: lightgreen">Nothing Detected</div></td>');
+                returnTD = "<td><div class=" + statusClass + " style='background-color: lightgreen'>Nothing Detected</div></td>";
             } else {
-                return('<td><div class="motionSensor" style="background-color: red">Motion Detected!</div></td>');
+                returnTD = "<td><div class=" + statusClass + " style='background-color: red'>Motion Detected!</div></td>";
+            }
+        } else {
+            if (statusClass) { //something we have defined to monitor..via the config page in the collection and the main.css file..
+                if (status == 'OFF') {
+                    returnTD = "<td><div class=" + statusClass + " style='background-color: red'>" + topic +" - ELEMENT OFF</div></td>";
+                } else {
+                    returnTD = "<td><div class=" + statusClass + " style='background-color: lightgreen'>" + topic +" - ELEMENT ON</div></td>";
+                }
             }
         }
+        return(returnTD);
     },
 });

@@ -53,11 +53,12 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-    'element.insert'(topic,description,type,signal) {
+    'element.insert'(topic,description,type,signal,statusClass) {
         check(topic,String);
         check(description,String);
         check(type,String);
         check(signal,String);
+        check(statusClass,String);
 
         if (! this.userId) { //Logged in?
             throw new Meteor.Error('not-authorized');
@@ -72,6 +73,7 @@ Meteor.methods({
                 type: type,
                 signal: signal,
                 status: null,
+                statusClass: statusClass,
                 owner: this.userId,
                 username: Meteor.users.findOne(this.userId).username,
                 createdAt: Date.now() // no need coma here

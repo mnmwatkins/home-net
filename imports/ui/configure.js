@@ -38,6 +38,7 @@ Template.configure.events({
         const description = target.description.value
         const type = target.type.value;
         const signal = target.signal.value;
+        const statusClass = target.statusClass.value;
 
         if (topic === "" || description === "") {
             Bert.alert( 'You must enter: Topic and Description', 'danger', 'fixed-top', 'fa-frown-o' );
@@ -45,7 +46,7 @@ Template.configure.events({
         }
 
         // Insert a element into the collection (see home-net.js)
-        Meteor.call('element.insert', topic,description,type,signal);
+        Meteor.call('element.insert', topic,description,type,signal,statusClass);
 
         // Clear form
         target.topic.value = '';
