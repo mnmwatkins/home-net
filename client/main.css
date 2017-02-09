@@ -35,3 +35,9 @@ div.frontDoor {
     left: 255px;
     text-align: center;
 }
+div.motionSensor {
+    position: absolute;
+    top: 120px;
+    left: 345px;
+    text-align: center;
+}

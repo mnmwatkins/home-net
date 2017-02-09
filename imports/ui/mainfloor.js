@@ -36,6 +36,12 @@ Template.mainfloor.helpers({
             } else {
                 return('<td><div class="frontDoor" style="background-color: lightgreen">DOOR<BR>(CLOSED)</div></td>');
             }
+        } else if (topic === '/switch/0/1') { //motion sensor
+            if (status == 'OFF') {
+                return('<td><div class="motionSensor" style="background-color: lightgreen">Nothing Detected</div></td>');
+            } else {
+                return('<td><div class="motionSensor" style="background-color: red">Motion Detected!</div></td>');
+            }
         }
     },
 });
