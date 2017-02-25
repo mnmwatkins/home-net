@@ -51,6 +51,7 @@ Template.configure.events({
         // Clear form
         target.topic.value = '';
         target.description.value = '';
+        target.statusClass.value = '';
         target.type.value = 'output';
         target.signal.value = 'digital';
     },

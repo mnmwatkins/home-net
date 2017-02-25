@@ -54,3 +54,27 @@ div.outlet01 {
     left: 200px;
     text-align: center;
 }
+div.outlet10 {
+    position: absolute;
+    top: 285px;
+    left: 200px;
+    text-align: center;
+}
+div.outlet20 {
+    position: absolute;
+    top: 315px;
+    left: 200px;
+    text-align: center;
+}
+div.outlet80 {
+    position: absolute;
+    top: 250px;
+    left: 500px;
+    text-align: center;
+}
+div.outlet81 {
+    position: absolute;
+    top: 275px;
+    left: 500px;
+    text-align: center;
+}
