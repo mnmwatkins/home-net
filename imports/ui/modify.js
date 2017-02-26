@@ -43,4 +43,4 @@ Template.modify.events({
             }
         });
     },
-})
+});

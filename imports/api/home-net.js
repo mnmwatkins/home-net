@@ -138,7 +138,7 @@ Meteor.methods({
         if (!this.userId) { //actually logged in; throw error..
             throw new Meteor.Error('not-authorized');
         }
-        const currentStatus = Elements.findOne(topicId);
+        const currentStatus = Elements.findOne(topicId); //Find the current status in the database.
         var mqttTopic = topic;
 
         if (currentStatus.status === null) { //newly defined element, not set yet so force off; then turn allow on..just in case it was left in a strange state.
