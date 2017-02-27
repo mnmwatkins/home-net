@@ -16,3 +16,8 @@ Effectively this is what this project is:
 
 And in the end, anything else that comes to mind.
 
+Devices communciating with:
+ - Adafruit's Huzzah Feather - ESP8266 Wifi driving two channel relay board (SainSmart 2-Channel Relay Module) via MQTT
+ - SONOFF - ESP8266 relay module with custom sketch for the ESPWifi board to talk MQTT
+ - Raspberry PI (v2) - Custom Node.js code to read MQTT and report motion sensing / reed switch - MQTT Driven
+ - Raspberry PI (v3) - Custom Node.js code to drive eight channel relay board (SainSmart 8-Channel) - MQTT Driven
