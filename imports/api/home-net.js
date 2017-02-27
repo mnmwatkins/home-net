@@ -5,6 +5,7 @@ import { check } from 'meteor/check';
 export const Tasks = new Mongo.Collection('tasks');
 export const MQTT = new Mongo.Collection('mqtt');
 export const Elements = new Mongo.Collection('elements'); //the I/O IoT elements and thier current state.
+export const AlertMail = new Mongo.Collection('alertmail');
 
 Router.route('/', {
     name: 'home',
@@ -29,7 +30,10 @@ Router.route('/mainfloor', {
     name: 'mainfloor',
     template: 'mainfloor',
 });
-
+Router.route('/alertmail', {
+    name: 'alertmail',
+    template: 'alertmail',
+});
 
 if (Meteor.isServer) {
     //code only runs on server
@@ -53,6 +57,21 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
+    'alertmail.insert'(text) {
+        check(text,String);
+
+        if (! this.userId) { //Logged in?
+            throw new Meteor.Error('not-authorized');
+        }
+
+        AlertMail.insert({
+            message: text,
+            sent: false,
+            createdAt: new Date(),
+            owner: this.userId,
+            username: Meteor.users.findOne(this.userId).username,
+        });
+    },
     'element.insert'(topic,description,type,signal,statusClass) {
         check(topic,String);
         check(description,String);

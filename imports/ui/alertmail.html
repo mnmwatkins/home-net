@@ -1,0 +1,14 @@
+<template name="alertmail">
+    {{ > header }}
+    WOOT
+    <div class="jumbotron">
+        <ul>
+            {{#if currentUser}}
+                <form class="navbar-form new-msg">
+                    <input type="text" class="form-control" name="text" placeholder="Type to send new message." />
+                    <input type="submit" class="btn btn-sm btn-primary" value="Submit Message">
+                </form>
+            {{/if}}
+        </ul>
+    </div>
+</template>
