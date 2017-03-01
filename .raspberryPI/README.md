@@ -1,5 +1,5 @@
 This directory is a number of node.js programs for the RaspberryPI that will
-monitor a GPIO ping and send a MQTT Message.
+monitor a GPIO pins and send a MQTT Message.
 
 Both programs are the same, but monitor different switches at this point. These
 could easily be combined into a overall monitor program the checks multiple
