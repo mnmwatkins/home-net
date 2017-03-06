@@ -5,108 +5,109 @@
     <div class="well">
         <p>
             This is where you will enter the IoT elements.  You will need to know the MQTT topic for each element to
-            add it to the available list.
+            add it to the available list.  <BR><B>This list is only available if your are logged into the system.</B>
         </p>
         <p>
             More directions if needed..
         </p>
     </div>
-    <div class="page-header">
-        <h2>Element Data Entry</h2>
-    </div>
-    <form class="new-element">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Enter Topic</h3>
-                    </div>
-                    <div class="panel-body">
-                        {{#if currentUser}}
-                            <input type="text" style="width:100%" class="new-topic" name="topic" placeholder="Type to add new topic (ie. /outlet/status/0/0)" />
-                        {{/if}}
-                    </div>
-                </div>
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Enter Point Data Type</h3>
-                    </div>
-                    <div class="panel-body">
-                        {{#if currentUser}}
-                            <input type="radio" name="type" value="output" checked> Output (ie. relay)<BR>
-                            <input type="radio" name="type" value="input"> Input (ie. switch)
-                        {{/if}}
-                    </div>
-                </div>
-            </div><!-- /.col-sm-4 -->
-            <div class="col-sm-4">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Enter Description</h3>
-                    </div>
-                    <div class="panel-body">
-                        {{#if currentUser}}
-                            <input type="text" style="width:100%" class="new-description" name="description" placeholder="Type a description (ie. Main Floor Lights)" />
-                        {{/if}}
-                    </div>
-                </div>
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Enter Point Data Signal</h3>
-                    </div>
-                    <div class="panel-body">
-                        {{#if currentUser}}
-                            <input type="radio" name="signal" value="digital" checked> Digital (ie. switch, relay, etc.)<BR>
-                            <input type="radio" name="signal" value="analog"> Analog (ie. temperature, etc.)<br>
-                        {{/if}}
-                    </div>
-                </div>
-            </div><!-- /.col-sm-4 -->
-            <div class="col-sm-4">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Enter Class for Status (Input Elements - Optional)</h3>
-                    </div>
-                    <div class="panel-body">
-                        {{#if currentUser}}
-                            <input type="text" style="width:100%" class="new-class" name="statusClass" placeholder="Enter the class reference for status page (ie. frontDoor)" />
-                        {{/if}}
-                    </div>
-                </div>
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Save or Update Element</h3>
-                    </div>
-                    <div class="panel-body" align="center">
-                        <button type="submit" class="btn btn-lg btn-primary save-element">Save / Update</button>
-                    </div>
-                </div>
-            </div><!-- /.col-sm-4 -->
+    {{#if currentUser}} <!-- only show info if actually logged in -->
+        <div class="page-header">
+            <h2>Element Data Entry</h2>
         </div>
-    </form>
+        <form class="new-element">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Enter Topic</h3>
+                        </div>
+                        <div class="panel-body">
+                            {{#if currentUser}}
+                                <input type="text" style="width:100%" class="new-topic" name="topic" placeholder="Type to add new topic (ie. /outlet/status/0/0)" />
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Enter Point Data Type</h3>
+                        </div>
+                        <div class="panel-body">
+                            {{#if currentUser}}
+                                <input type="radio" name="type" value="output" checked> Output (ie. relay)<BR>
+                                <input type="radio" name="type" value="input"> Input (ie. switch)
+                            {{/if}}
+                        </div>
+                    </div>
+                </div><!-- /.col-sm-4 -->
+                <div class="col-sm-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Enter Description</h3>
+                        </div>
+                        <div class="panel-body">
+                            {{#if currentUser}}
+                                <input type="text" style="width:100%" class="new-description" name="description" placeholder="Type a description (ie. Main Floor Lights)" />
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Enter Point Data Signal</h3>
+                        </div>
+                        <div class="panel-body">
+                            {{#if currentUser}}
+                                <input type="radio" name="signal" value="digital" checked> Digital (ie. switch, relay, etc.)<BR>
+                                <input type="radio" name="signal" value="analog"> Analog (ie. temperature, etc.)<br>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div><!-- /.col-sm-4 -->
+                <div class="col-sm-4">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Enter Class for Status (Input Elements - Optional)</h3>
+                        </div>
+                        <div class="panel-body">
+                            {{#if currentUser}}
+                                <input type="text" style="width:100%" class="new-class" name="statusClass" placeholder="Enter the class reference for status page (ie. frontDoor)" />
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Save or Update Element</h3>
+                        </div>
+                        <div class="panel-body" align="center">
+                            <button type="submit" class="btn btn-lg btn-primary save-element">Save / Update</button>
+                        </div>
+                    </div>
+                </div><!-- /.col-sm-4 -->
+            </div>
+        </form>
 
-    <div class="jumbotron">
-    <h2 class="sub-header">Defined Elements</h2>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Topic</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>Signal</th>
-                <th>Class</th>
-                <th>Status</th>
-                <th>Delete?</th>
-            </tr>
-            </thead>
-            <tbody>
-                {{#each elements}}
-                    {{> element}}
-                {{/each}}
-            </tbody>
-        </table>
-    </div>
-
-    </div>
+        <div class="jumbotron">
+            <h2 class="sub-header">Defined Elements</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Topic</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Signal</th>
+                        <th>Class</th>
+                        <th>Status</th>
+                        <th>Delete?</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {{#each elements}}
+                            {{> element}}
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {{/if}}
 </template>

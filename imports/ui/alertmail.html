@@ -1,14 +1,40 @@
 <template name="alertmail">
     {{ > header }}
-    WOOT
+    <BR><BR><BR>
+    <div class="well">
+        <p>
+            This is a testing area for the email system under development.
+        </p>
+    </div>
     <div class="jumbotron">
         <ul>
             {{#if currentUser}}
                 <form class="navbar-form new-msg">
-                    <input type="text" class="form-control" name="text" placeholder="Type to send new message." />
+                    <input style="width:400px" type="text" class="form-control" name="to" placeholder="Type To: address" />
+                    <input style="width:400px" type="text" class="form-control" name="text" placeholder="Type message to send." />
                     <input type="submit" class="btn btn-sm btn-primary" value="Submit Message">
                 </form>
             {{/if}}
         </ul>
+    </div>
+
+    <div class="jumbotron">
+        <h2 class="sub-header">Defined Alert Email Messages</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>To:</th>
+                    <th>Message</th>
+                    <th>Sent?</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {{#each alertMessage}}
+                        {{> mail}}
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>

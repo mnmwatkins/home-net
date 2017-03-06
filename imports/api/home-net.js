@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
-export const Tasks = new Mongo.Collection('tasks');
 export const MQTT = new Mongo.Collection('mqtt');
 export const Elements = new Mongo.Collection('elements'); //the I/O IoT elements and thier current state.
 export const AlertMail = new Mongo.Collection('alertmail');
@@ -14,13 +13,6 @@ Router.route('/', {
 Router.route('/modify', {
     name: 'modify',
     template: 'modify',
-    data: function() {
-            //console.log("opened modify");
-    },
-});
-Router.route('/tasklist', {
-    name: 'tasklist',
-    template: 'tasklist',
 });
 Router.route('/configure', {
     name: 'configure',
@@ -37,16 +29,11 @@ Router.route('/alertmail', {
 
 if (Meteor.isServer) {
     //code only runs on server
-    Meteor.publish('tasks',function tasksPublication() {
-        return Tasks.find({
-            $or: [
-                {private: {$ne: true}},
-                {owner: this.userId},
-            ],
-        });
-    });
     Meteor.publish('elements',function elementsPublication() {
         return Elements.find({});
+    });
+    Meteor.publish('alertMessage',function alertMessagePublication() {
+        return AlertMail.find({});
     });
 
     MQTT.mqttConnect("mqtt://localhost", {
@@ -57,20 +44,23 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-    'alertmail.insert'(text) {
-        check(text,String);
-
-        if (! this.userId) { //Logged in?
-            throw new Meteor.Error('not-authorized');
-        }
-
+    'alertmail.insert'(text, to) {
         AlertMail.insert({
+            to: to,
             message: text,
             sent: false,
             createdAt: new Date(),
             owner: this.userId,
             username: Meteor.users.findOne(this.userId).username,
         });
+    },
+    'alertmail.remove'(messageId) {
+        check(messageId,String);
+        if (! this.userId) {
+            //if it is private, make sure only the ownder can delete
+            throw new Meteor.Error('not-authorized');
+        }
+        AlertMail.remove(messageId);
     },
     'element.insert'(topic,description,type,signal,statusClass) {
         check(topic,String);
@@ -106,52 +96,6 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
         Elements.remove(elementId);
-    },
-    'tasks.insert'(text) {
-        check(text,String);
-
-        if (! this.userId) { //Logged in?
-            throw new Meteor.Error('not-authorized');
-        }
-
-        Tasks.insert({
-            text,
-            createdAt: new Date(),
-            owner: this.userId,
-            username: Meteor.users.findOne(this.userId).username,
-        });
-    },
-    'tasks.remove'(taskId) {
-        check(taskId,String);
-        const task = Tasks.findOne(taskId);
-        if (task.private && (task.owner !== this.userId)) {
-            //if it is private, make sure only the ownder can delete
-            throw new Meteor.Error('not-authorized');
-        }
-        Tasks.remove(taskId);
-    },
-    'tasks.setChecked'(taskId,setChecked) {
-        check(taskId,String);
-        check(setChecked,Boolean);
-        const task = Tasks.findOne(taskId);
-        if (task.private && (task.owner !== this.userId)) {
-            // If the task is private, make sure only the owner can check it off
-            throw new Meteor.Error('not-authorized');
-        }
-        Tasks.update(taskId, {$set: {checked: setChecked}});
-    },
-    'tasks.setPrivate'(taskId, setToPrivate) {
-        check(taskId, String);
-        check(setToPrivate, Boolean);
-
-        const task = Tasks.findOne(taskId);
-
-        //check owner to verify.
-        if (task.owner !== this.userId) {
-            throw new Meteor.Error('not-authorized');
-        }
-
-        Tasks.update(taskId, {$set: {private: setToPrivate}});
     },
     'mqtt.send'(topicId,topic) {
         if (!this.userId) { //actually logged in; throw error..

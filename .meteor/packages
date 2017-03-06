@@ -28,3 +28,4 @@ ian:accounts-ui-bootstrap-3
 iron:router
 themeteorchef:bert
 session@1.1.7
+epaminond:nodemailer

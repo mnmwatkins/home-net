@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { MQTT } from '../imports/api/home-net.js';
 import { Elements } from '../imports/api/home-net.js';
+import { AlertMail } from '../imports/api/home-net.js';
 
 import '../imports/api/home-net.js'
 
@@ -41,3 +42,35 @@ MQTT.find().observe({
         //console.log('got a remove...')
     }
 });
+
+AlertMail.find({'sent':false}).observe({
+	added: function (document) {
+		/* I am using sendmail on the server. Didn't set up the Gmail
+		 * configuration here or someother email service; wanted to keep
+		 * the credentials for my mail system more abstracted. Besides I have this
+		 * setup for other projects; so why not use it?
+		*/
+		var transporter = Nodemailer.createTransport({
+			service: "localhost",
+			sendmail: true,
+		});
+		var mailOptions = {
+			from: 'HomeNet',
+			subject: 'Alert from HomeNet!',
+			html: '<b>DEFUALT MESSAGE</B>', //If I get this email; something is broke.
+		};
+
+		var alertMessage = document.message;
+		var messageId = document._id;
+        var toEmail = document.to;
+
+        mailOptions['to'] = toEmail; //Comes from the database...
+		mailOptions['html'] = '<B>' + alertMessage + '<B>';
+		transporter.sendMail(mailOptions);
+		AlertMail.update(
+			{_id : messageId},
+			{$set: {'sent':true} }, //Don't delete so you have a record of emails.
+		);
+		transporter.close();
+	}
+})
