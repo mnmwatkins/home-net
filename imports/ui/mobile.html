@@ -1,0 +1,105 @@
+<template name="mobile">
+    {{ > header }}
+    {{ > bertAlert }} <!--allow an alert diaglog -->
+    <BR><BR><BR>
+    <div class="well">
+        <p>
+            This is where you will change the state and monitor the IoT elements.  You will need to know the MQTT topic for each element to
+            add it to the available list.  <BR><B>This list is only available if your are logged into the system.</B>
+        </p>
+        <p>
+            More directions if needed..
+        </p>
+    </div>
+    {{#if currentUser}} <!-- only show info if actually logged in -->
+        <div class="jumbotron">
+            <h2 class="sub-header">Defined Elements - You can modify.</h2>
+            <div class="row">
+                <div class="col-sm-2">
+                    {{#each elements_modify}}
+                    <div class="panel panel-primary" id="{{topic}}">
+                        {{{toggleState}}} <!-- helper to swap the color of the panel -->
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Output</h3>
+                        </div>
+                        <div class="panel-body">
+                            <b>ID:</b>{{topic}}<br>
+                            <b>Description</b><br>{{description}}<br>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">
+                    {{#each elements_monitor}}
+                    <div class="panel panel-primary" id="{{topic}}">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Output</h3>
+                        </div>
+                        <div class="panel-body">
+                            <b>ID:</b>{{topic}}<br>
+                            <b>Description</b><br>{{description}}<br>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <div class="jumbotron">
+            <h2 class="sub-header">Defined Elements - You can monitor.</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Signal</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each elements_monitor}}
+                        <tr>
+                            <td>{{topic}}</td>
+                            <td>{{description}}</td>
+                            <td>{{type}}</td>
+                            <td>{{signal}}</td>
+                            {{{if_off status}}} <!-- helper to change the color of the <td> elemnt to highlight -->
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="jumbotron">
+            <h2 class="sub-header">Defined Elements - You can watch change.</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Signal</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each elements_analog}}
+                        <tr>
+                            <td>{{topic}}</td>
+                            <td>{{description}}</td>
+                            <td>{{type}}</td>
+                            <td>{{signal}}</td>
+                            <td>{{status}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {{/if}}
+</template>

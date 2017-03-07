@@ -14,6 +14,10 @@ Router.route('/modify', {
     name: 'modify',
     template: 'modify',
 });
+Router.route('/mobile', {
+    name: 'mobile',
+    template: 'mobile',
+});
 Router.route('/configure', {
     name: 'configure',
     template: 'configure',
