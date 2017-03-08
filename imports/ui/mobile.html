@@ -19,31 +19,13 @@
             <div class="row">
                 <div class="col-sm-2">
                     {{#each elements_modify}}
-                    <div class="panel panel-primary" id="{{topic}}">
-                        {{{toggleState}}} <!-- helper to swap the color of the panel -->
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Output</h3>
-                        </div>
-                        <div class="panel-body">
-                            <b>ID:</b>{{topic}}<br>
-                            <b>Description</b><br>{{description}}<br>
-                        </div>
-                    </div>
+                        {{{getPanelDiv}}}
                     {{/each}}
                 </div>
 
                 <div class="col-sm-2">
                     {{#each elements_monitor}}
-                    <div class="panel panel-primary" id="{{topic}}">
-                        {{{toggleState}}}
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Input</h3>
-                        </div>
-                        <div class="panel-body">
-                            <b>ID:</b>{{topic}}<br>
-                            <b>Description</b><br>{{description}}<br>
-                        </div>
-                    </div>
+                        {{{getPanelDiv}}}
                     {{/each}}
                 </div>
 

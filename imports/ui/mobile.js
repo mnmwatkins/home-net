@@ -5,7 +5,7 @@ import './mobile.html'; //template
 
 
 Template.mobile.rendered = function() {
-    //console.log("back in register page.");
+    //console.log("rendered");
 
 };
 
@@ -25,30 +25,37 @@ Template.mobile.helpers({
     elements_analog() {
         return Elements.find({ $and: [ {type: { $eq: 'input' }}, {signal: {$eq: 'analog'}} ]}, {sort: {createdAt: -1} });
     },
-    if_off(status) {
-            if (status === 'OFF') {
-                return('<td><div class="status" style="background-color: lightgrey">OFF</div></td>');
-            } else {
-                return('<td><div class="status" style="background-color: green">ON</div></td>');
-            }
-            var statusDiv = document.getElementById(this.topic); //the id of the div is the same as the topic.
-            //Swap color of panel
-
-    },
-    toggleState() {
-        var statusDiv = document.getElementById(this.topic); //the id of the div is the same as the topic.
-        if (statusDiv !== null) {
-            if (this.status === "ON") {
-                statusDiv.className = "panel panel-success";
-            } else {
-                statusDiv.className = "panel panel-danger";
-            }
+    getPanelDiv() {
+        var returnHTML = "";
+        if (this.status === 'OFF') {
+            returnHTML =    "<div class='panel panel-danger' id='" + this.topic + "'>" +
+                                "<div class='panel-heading'>" +
+                                    "<h3 class='panel-title'>Output</h3>" +
+                                "</div>" +
+                                "<div class='panel-body'>" +
+                                    "<b>ID:</b>" + this.topic + "<br>" +
+                                    "<b>Description</b><br>" + this.description + "<br>" +
+                                "</div>" +
+                            "</div>";
+            //return('<td><div class="status" style="background-color: lightgrey">OFF</div></td>');
+        } else {
+            returnHTML =    "<div class='panel panel-success' id='" + this.topic + "'>" +
+                                "<div class='panel-heading'>" +
+                                    "<h3 class='panel-title'>Output</h3>" +
+                                "</div>" +
+                                "<div class='panel-body'>" +
+                                    "<b>ID:</b>" + this.topic + "<br>" +
+                                    "<b>Description</b><br>" + this.description + "<br>" +
+                                "</div>" +
+                            "</div>";
+            //return('<td><div class="status" style="background-color: green">ON</div></td>');
         }
+        return(returnHTML);
     },
 });
 
 Template.mobile.events({
-    'click .panel-danger,.panel-success,.panel-primary'(event) {
+    'click .panel-danger,.panel-success'(event) {
         var statusDiv = document.getElementById(this.topic); //the id of the div is the same as the topic.
         //Swap color of panel
         if (this.status === "ON") {
