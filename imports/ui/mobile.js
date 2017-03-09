@@ -32,19 +32,17 @@ Template.mobile.helpers({
             pointType = "Input";
         }
         if (this.status === 'OFF') {
-            returnHTML =    "<div class='panel panel-danger' id='" + this.topic + "'>";
-            //return('<td><div class="status" style="background-color: lightgrey">OFF</div></td>');
+            returnHTML =    "<div class='panel panel-danger " + this.type + "' id='" + this.topic + "'>";
         } else {
-            returnHTML =    "<div class='panel panel-success' id='" + this.topic + "'>";
-            //return('<td><div class="status" style="background-color: green">ON</div></td>');
+            returnHTML =    "<div class='panel panel-success " + this.type + "' id='" + this.topic + "'>";
         }
         returnHTML += "<div class='panel-heading'>" +
-                "<h3 class='panel-title'>" + pointType + "</h3>" +
-            "</div>" +
-            "<div class='panel-body'>" +
-                "<b>ID:</b>" + this.topic + "<br>" +
-                "<b>Description</b><br>" + this.description + "<br>" +
-            "</div>" +
+                    "<h3 class='panel-title'>" + pointType + "</h3>" +
+                "</div>" +
+                "<div class='panel-body'>" +
+                    "<b>ID:</b>" + this.topic + "<br>" +
+                    "<b>Description</b><br>" + this.description + "<br>" +
+                "</div>" +
             "</div>";
         return(returnHTML);
     },
@@ -52,21 +50,23 @@ Template.mobile.helpers({
 
 Template.mobile.events({
     'click .panel-danger,.panel-success'(event) {
-        var statusDiv = document.getElementById(this.topic); //the id of the div is the same as the topic.
-        //Swap color of panel
-        if (this.status === "ON") {
-            statusDiv.className = "panel panel-danger";
-        } else {
-            statusDiv.className = "panel panel-success";
-        }
-        //Toggle the output.
-        Meteor.call('mqtt.send',this._id,this.topic, function(error, result) {
-            if (typeof error != 'undefined') { //we returned an error
-                if (error.error === "not-authorized") {
-                    Bert.alert( 'Not-Authorized: You must be logged in to modify elements.', 'danger', 'fixed-top', 'fa-frown-o' );
-                }
+        if (this.type === "output") { //Only react to output type
+            var statusDiv = document.getElementById(this.topic); //the id of the div is the same as the topic.
+            //Swap color of panel by changing the class.
+            if (this.status === "ON") {
+                statusDiv.className = "panel panel-danger " + this.type;
+            } else {
+                statusDiv.className = "panel panel-success " + this.type;
             }
-        });
+            //Toggle the output.
+            Meteor.call('mqtt.send',this._id,this.topic, function(error, result) {
+                if (typeof error != 'undefined') { //we returned an error
+                    if (error.error === "not-authorized") {
+                        Bert.alert( 'Not-Authorized: You must be logged in to modify elements.', 'danger', 'fixed-top', 'fa-frown-o' );
+                    }
+                }
+            });
+        }
     },
 
     'click .toggleOutlet'(event) {
