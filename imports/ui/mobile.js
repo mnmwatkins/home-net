@@ -41,7 +41,7 @@ Template.mobile.helpers({
                 "</div>" +
                 "<div class='panel-body'>" +
                     "<b>ID:</b>" + this.topic + "<br>" +
-                    "<b>Description</b><br>" + this.description + "<br>" +
+                    "<b>Description:</b><br>" + this.description + "<br>" +
                 "</div>" +
             "</div>";
         return(returnHTML);
