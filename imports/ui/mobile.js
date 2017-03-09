@@ -27,29 +27,25 @@ Template.mobile.helpers({
     },
     getPanelDiv() {
         var returnHTML = "";
+        var pointType = "Output"; //Label on the panels either Input or Output
+        if (this.type === "input") {
+            pointType = "Input";
+        }
         if (this.status === 'OFF') {
-            returnHTML =    "<div class='panel panel-danger' id='" + this.topic + "'>" +
-                                "<div class='panel-heading'>" +
-                                    "<h3 class='panel-title'>Output</h3>" +
-                                "</div>" +
-                                "<div class='panel-body'>" +
-                                    "<b>ID:</b>" + this.topic + "<br>" +
-                                    "<b>Description</b><br>" + this.description + "<br>" +
-                                "</div>" +
-                            "</div>";
+            returnHTML =    "<div class='panel panel-danger' id='" + this.topic + "'>";
             //return('<td><div class="status" style="background-color: lightgrey">OFF</div></td>');
         } else {
-            returnHTML =    "<div class='panel panel-success' id='" + this.topic + "'>" +
-                                "<div class='panel-heading'>" +
-                                    "<h3 class='panel-title'>Output</h3>" +
-                                "</div>" +
-                                "<div class='panel-body'>" +
-                                    "<b>ID:</b>" + this.topic + "<br>" +
-                                    "<b>Description</b><br>" + this.description + "<br>" +
-                                "</div>" +
-                            "</div>";
+            returnHTML =    "<div class='panel panel-success' id='" + this.topic + "'>";
             //return('<td><div class="status" style="background-color: green">ON</div></td>');
         }
+        returnHTML += "<div class='panel-heading'>" +
+                "<h3 class='panel-title'>" + pointType + "</h3>" +
+            "</div>" +
+            "<div class='panel-body'>" +
+                "<b>ID:</b>" + this.topic + "<br>" +
+                "<b>Description</b><br>" + this.description + "<br>" +
+            "</div>" +
+            "</div>";
         return(returnHTML);
     },
 });
