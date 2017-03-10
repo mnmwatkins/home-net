@@ -51,9 +51,9 @@ Template.mainfloor.helpers({
         } else {
             if (statusClass) { //something we have defined to monitor..via the config page in the collection and the main.css file..
                 if (status == 'OFF') {
-                    returnTD = "<td><div class=" + statusClass + " style='background-color: red'>" + topic +" - ELEMENT OFF</div></td>";
+                    returnTD = "<td><div class=" + statusClass + " style='background-color: red'>" + topic + "<BR>" + this.description + "</div></td>";
                 } else {
-                    returnTD = "<td><div class=" + statusClass + " style='background-color: lightgreen'>" + topic +" - ELEMENT ON</div></td>";
+                    returnTD = "<td><div class=" + statusClass + " style='background-color: lightgreen'>" + topic +"<BR>" + this.description + "</div></td>";
                 }
             }
         }
