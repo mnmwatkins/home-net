@@ -2,6 +2,9 @@
 #login-buttons {
   display: block;
 }
+.toggleArmed { /*Space the form not the toggle.*/
+  margin-top:10px;
+}
 li.checked {
   color: #888;
 }

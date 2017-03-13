@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { Elements } from '../api/home-net.js'; //Task collection
+import { Elements } from '../api/home-net.js'; //Elements collection
 import './element.html'; //template
 
 Template.element.helpers({
