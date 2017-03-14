@@ -43,8 +43,11 @@ Elements.find({'type':'input'}).observe({
                 status = SystemStatus.findOne({}).status; //Find the current state
             }
             if (status === "ARMED") {
-                var to = "mnmwatkins@gmail.com";
-                var message = "Home Net System: Armed and OFF - " + document.status;
+                var to = "mnmwatkins@gmail.com;melwat92@gmail.com";
+                var message = "Home Net System: Armed <BR>" +
+                              "Element: " + document.topic + "<BR>" +
+                              "Description: " + document.description + "<BR>" +
+                              "Status: " + document.status;
                 AlertMail.insert({
                     to: to,
                     message: message,
