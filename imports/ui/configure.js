@@ -24,6 +24,9 @@ Template.configure.helpers({
     elements() {
         return Elements.find({}, {sort: {createdAt: -1} });
     },
+    notAuthorized() {
+            Bert.alert('To view this page; you must login.', 'danger', 'fixed-top', 'fa-frown-o' );
+    },
 });
 
 

@@ -14,18 +14,6 @@ Template.mainfloor.onCreated(function configureOnCreated() {
 });
 
 Template.mainfloor.helpers({
-    //Return the differnet elements..analog / outputs are not yet defined.
-    /*
-    elements_modify() {
-        return Elements.find({ $and: [ {type: { $eq: 'output' }}, {signal: {$eq: 'digital'}} ]}, {sort: {createdAt: -1} });
-    },
-    elements_monitor() {
-        return Elements.find({ $and: [ {type: { $eq: 'input' }}, {signal: {$eq: 'digital'}} ]}, {sort: {createdAt: -1} });
-    },
-    elements_analog() {
-        return Elements.find({ $and: [ {type: { $eq: 'input' }}, {signal: {$eq: 'analog'}} ]}, {sort: {createdAt: -1} });
-    },
-    */
     elements_monitor() {
         return Elements.find({ $and: [ {signal: {$eq: 'digital'}} ]}, {sort: {createdAt: -1} });
     },
@@ -58,6 +46,9 @@ Template.mainfloor.helpers({
             }
         }
         return(returnTD);
+    },
+    notAuthorized() {
+            Bert.alert('To view this page; you must login.', 'danger', 'fixed-top', 'fa-frown-o' );
     },
 });
 Template.mainfloor.events({

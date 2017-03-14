@@ -46,6 +46,9 @@ Template.mobile.helpers({
             "</div>";
         return(returnHTML);
     },
+    notAuthorized() {
+            Bert.alert('To view this page; you must login.', 'danger', 'fixed-top', 'fa-frown-o' );
+    },
 });
 
 Template.mobile.events({
