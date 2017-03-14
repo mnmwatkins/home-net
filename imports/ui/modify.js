@@ -31,6 +31,9 @@ Template.modify.helpers({
                 return('<td><div class="status" style="background-color: green">ON</div></td>');
             }
     },
+    notAuthorized() {
+            Bert.alert('To view this page; you must login.', 'danger', 'fixed-top', 'fa-frown-o' );
+    },
 });
 
 Template.modify.events({
