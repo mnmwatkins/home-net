@@ -43,7 +43,8 @@ if (Meteor.isServer) {
     Meteor.publish('systemStatus',function systemStatusPublication() {
         return SystemStatus.find({});
     });
-    MQTT.mqttConnect("mqtt://localhost", {
+    //MQTT.mqttConnect("mqtt://localhost", {
+    MQTT.mqttConnect("mqtt://mqttbroker", {
         insert: true,
         raw: true,
     });

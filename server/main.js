@@ -17,7 +17,8 @@ Meteor.startup(() => {});
  *
  * Topics: "status" topics for I/O and "system" topic for alarming
  */
-MQTT.mqttConnect("mqtt://localhost", ["/+/status/+/+", "/home-net/system"], {}, {}); //Format for status topics eg. /outlet/status/0/0 (type: outlet number 0, plug 0...)
+MQTT.mqttConnect("mqtt://mqttbroker", ["/+/status/+/+", "/home-net/system"], {}, {}); //Format for status topics eg. /outlet/status/0/0 (type: outlet number 0, plug 0...)
+//MQTT.mqttConnect("mqtt://localhost", ["/+/status/+/+", "/home-net/system"], {}, {}); //Format for status topics eg. /outlet/status/0/0 (type: outlet number 0, plug 0...)
 MQTT.find().observe({
     added: function (document) {
         // Do something if needed..this will change when a element is turned on or any published data is changed.
