@@ -38,13 +38,19 @@ div.frontDoor {
     left: 255px;
     text-align: center;
 }
-div.motionSensor {
+div.switch01 {
     position: absolute;
     top: 120px;
-    left: 345px;
+    left: 298px;
     text-align: center;
 }
-
+div.socket00 {
+    position: absolute;
+    top: 375px;
+    left: 50px;
+    text-align: center;
+    transform: rotate(-90deg);
+}
 div.outlet00 {
     position: absolute;
     top: 195px;
@@ -65,8 +71,8 @@ div.outlet10 {
 }
 div.outlet20 {
     position: absolute;
-    top: 315px;
-    left: 200px;
+    top: 650px;
+    left: 350px;
     text-align: center;
 }
 div.outlet80 {
