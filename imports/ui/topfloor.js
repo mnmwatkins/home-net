@@ -1,19 +1,19 @@
 import { Template } from 'meteor/templating';
 import { Elements } from '../api/home-net.js'; //Task collection
 import './header.js';
-import './mainfloor.html'; //template
+import './topfloor.html'; //template
 
 
-Template.mainfloor.rendered = function() {
+Template.topfloor.rendered = function() {
     //console.log("back in register page.");
 };
 
-Template.mainfloor.onCreated(function configureOnCreated() {
+Template.topfloor.onCreated(function configureOnCreated() {
     this.state = new ReactiveDict();
     Meteor.subscribe('elements');
 });
 
-Template.mainfloor.helpers({
+Template.topfloor.helpers({
     elements_monitor() {
         return Elements.find({ $and: [ {signal: {$eq: 'digital'}} ]}, {sort: {createdAt: -1} });
     },
@@ -24,6 +24,7 @@ Template.mainfloor.helpers({
             You can set up unique actions by topic or by default based only on status (ie. ON or OFF..)
         */
         var returnTD = "";
+        /*
         if (topic === '/switch/0/0') { //front door.
             if (status == 'OFF') {
                 returnTD = "<td><div class=" + statusClass + " style='background-color: red'>DOOR<BR>(OPENED)</div></td>";
@@ -45,13 +46,14 @@ Template.mainfloor.helpers({
                 }
             }
         }
+        */
         return(returnTD);
     },
     notAuthorized() {
             Bert.alert('To view this page; you must login.', 'danger', 'fixed-top', 'fa-frown-o' );
     },
 });
-Template.mainfloor.events({
+Template.topfloor.events({
 'click '(event) {
         if (event.target.className) {
             //format the div class to a valid topic..

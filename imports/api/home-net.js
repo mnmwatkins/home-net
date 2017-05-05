@@ -27,6 +27,10 @@ Router.route('/mainfloor', {
     name: 'mainfloor',
     template: 'mainfloor',
 });
+Router.route('/topfloor', {
+    name: 'topfloor',
+    template: 'topfloor',
+});
 Router.route('/alertmail', {
     name: 'alertmail',
     template: 'alertmail',

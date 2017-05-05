@@ -1,0 +1,15 @@
+<template name="topfloor">
+    {{ > header }}
+    {{ > bertAlert }} <!--allow an alert diaglog -->
+    <BR><BR>
+    {{#if currentUser}} <!-- only show info if actually logged in -->
+        <div style="position: absolute; top: 0px; left: 0px">
+            <img src="/TopFloorLayout.png">
+            {{#each elements_monitor}}
+                {{{if_open topic status statusClass}}}
+            {{/each}}
+        </div>
+    {{else}}
+        {{{notAuthorized}}}
+    {{/if}}
+</template>
