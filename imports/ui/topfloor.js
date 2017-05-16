@@ -24,29 +24,13 @@ Template.topfloor.helpers({
             You can set up unique actions by topic or by default based only on status (ie. ON or OFF..)
         */
         var returnTD = "";
-        /*
-        if (topic === '/switch/0/0') { //front door.
+        if (topic === '/outlet/0/0' || topic === '/outlet/0/1' || topic === '/outlet/1/0') { //Top floor items
             if (status == 'OFF') {
-                returnTD = "<td><div class=" + statusClass + " style='background-color: red'>DOOR<BR>(OPENED)</div></td>";
+                returnTD = "<td><div class=" + statusClass + " style='background-color: red'>" + this.description + "</div></td>";
             } else {
-                returnTD = "<td><div class=" + statusClass + " style='background-color: lightgreen'>DOOR<BR>(CLOSED)</div></td>";
-            }
-        } else if (topic === '/switch/0/1') { //motion sensor
-            if (status == 'OFF') {
-                returnTD = "<td><div class=" + statusClass + " style='background-color: red'>Motion Detected!</div></td>";
-            } else {
-                returnTD = "<td><div class=" + statusClass + " style='background-color: lightgreen'>Nothing Detected</div></td>";
-            }
-        } else {
-            if (statusClass) { //something we have defined to monitor..via the config page in the collection and the main.css file..
-                if (status == 'OFF') {
-                    returnTD = "<td><div class=" + statusClass + " style='background-color: red'>" + topic + "<BR>" + this.description + "</div></td>";
-                } else {
-                    returnTD = "<td><div class=" + statusClass + " style='background-color: lightgreen'>" + topic +"<BR>" + this.description + "</div></td>";
-                }
-            }
-        }
-        */
+                returnTD = "<td><div class=" + statusClass + " style='background-color: lightgreen'>" + this.description + "</div></td>";
+			}
+        } 
         return(returnTD);
     },
     notAuthorized() {

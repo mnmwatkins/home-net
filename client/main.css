@@ -53,21 +53,22 @@ div.socket00 {
 }
 div.outlet00 {
     position: absolute;
-    top: 195px;
-    left: 200px;
+    top: 510px;
+    left: 110px;
     text-align: center;
 }
 div.outlet01 {
     position: absolute;
-    top: 215px;
-    left: 200px;
+    top: 600px;
+    left: 115px;
     text-align: center;
 }
 div.outlet10 {
     position: absolute;
     top: 285px;
-    left: 200px;
+    left: 50px;
     text-align: center;
+    transform: rotate(-90deg);
 }
 div.outlet20 {
     position: absolute;

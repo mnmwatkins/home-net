@@ -36,7 +36,15 @@ Template.mainfloor.helpers({
             } else {
                 returnTD = "<td><div class=" + statusClass + " style='background-color: lightgreen'>Nothing Detected</div></td>";
             }
-        } else {
+		} else if (topic === '/outlet/2/0' || topic === '/socket/0/0') { //Main floor items
+            if (status == 'OFF') {
+                returnTD = "<td><div class=" + statusClass + " style='background-color: red'>" + this.description + "</div></td>";
+            } else {
+                returnTD = "<td><div class=" + statusClass + " style='background-color: lightgreen'>" + this.description + "</div></td>";
+			}
+        } 
+        /*
+        else {
             if (statusClass) { //something we have defined to monitor..via the config page in the collection and the main.css file..
                 if (status == 'OFF') {
                     returnTD = "<td><div class=" + statusClass + " style='background-color: red'>" + topic + "<BR>" + this.description + "</div></td>";
@@ -45,6 +53,7 @@ Template.mainfloor.helpers({
                 }
             }
         }
+        */
         return(returnTD);
     },
     notAuthorized() {
