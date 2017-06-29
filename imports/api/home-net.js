@@ -6,6 +6,7 @@ export const MQTT = new Mongo.Collection('mqtt');
 export const Elements = new Mongo.Collection('elements'); //the I/O IoT elements and thier current state.
 export const AlertMail = new Mongo.Collection('alertmail');
 export const SystemStatus = new Mongo.Collection('systemstatus');
+export const EnableAuto = new Mongo.Collection('enableauto');
 
 Router.route('/', {
     name: 'home',
@@ -47,6 +48,9 @@ if (Meteor.isServer) {
     Meteor.publish('systemStatus',function systemStatusPublication() {
         return SystemStatus.find({});
     });
+    Meteor.publish('enableAuto',function enableAutoPublication() {
+        return EnableAuto.find({});
+    });
     //MQTT.mqttConnect("mqtt://localhost", {
     MQTT.mqttConnect("mqtt://mqttbroker", {
         insert: true,
@@ -55,6 +59,24 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
+    'enableauto.update'(status) {
+        var oldStatus = "DISABLED";
+        if (status === "DISABLED") {
+            oldStatus = "ENABLED";
+        }
+        EnableAuto.upsert({ //Insert or update topics or elements.
+            // Selector
+                status: oldStatus,
+            }, {
+            // Modifier
+            $set: {
+                status: status,
+                owner: this.userId,
+                username: Meteor.users.findOne(this.userId).username,
+                createdAt: Date.now() // no need coma here
+            }
+        });
+    },
     'systemstatus.update'(status) {
         var oldStatus = "DISARMED";
         if (status === "DISARMED") {

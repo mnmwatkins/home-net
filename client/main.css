@@ -5,6 +5,9 @@
 .toggleArmed { /*Space the form not the toggle.*/
   margin-top:10px;
 }
+.toggleAuto { /*Space the form not the toggle.*/
+  margin-top:10px;
+}
 li.checked {
   color: #888;
 }

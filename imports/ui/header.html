@@ -26,6 +26,7 @@
                     {{> loginButtons}} &nbsp;&nbsp;&nbsp;
                     {{#if currentUser}} <!-- only show info if actually logged in -->
                         {{{ifArmed current_status}}}
+                        {{{ifEnabled auto_status}}}
                     {{/if}}
                 </ul>
             </div>

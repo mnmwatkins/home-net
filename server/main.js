@@ -3,6 +3,7 @@ import { MQTT } from '../imports/api/home-net.js';
 import { Elements } from '../imports/api/home-net.js';
 import { AlertMail } from '../imports/api/home-net.js';
 import { SystemStatus } from '../imports/api/home-net.js';
+import { EnableAuto } from '../imports/api/home-net.js';
 
 import '../imports/api/home-net.js'
 

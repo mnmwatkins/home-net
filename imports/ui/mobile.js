@@ -71,7 +71,7 @@ Template.mobile.events({
             });
         }
     },
-
+    /*
     'click .toggleOutlet'(event) {
         Meteor.call('mqtt.send',this._id,this.topic, function(error, result) {
             if (typeof error != 'undefined') { //we returned an error
@@ -81,4 +81,5 @@ Template.mobile.events({
             }
         });
     },
+    */
 });
