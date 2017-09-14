@@ -30,7 +30,7 @@ Template.topfloor.helpers({
             } else {
                 returnTD = "<td><div class=" + statusClass + " style='background-color: lightgreen'>" + this.description + "</div></td>";
 			}
-        } 
+        }
         return(returnTD);
     },
     notAuthorized() {
@@ -39,16 +39,18 @@ Template.topfloor.helpers({
 });
 Template.topfloor.events({
 'click '(event) {
-        if (event.target.className) {
-            //format the div class to a valid topic..
-            var mqttTopic = "/" + event.target.className.replace(/[0-9]/g, function myFunction(x){return "/"+x;});
-            Meteor.call('mqtt.send',this._id,mqttTopic, function(error, result) {
-                if (typeof error != 'undefined') { //we returned an error
-                    if (error.error === "not-authorized") {
-                        Bert.alert( 'Not-Authorized: You must be logged in to modify elements.', 'danger', 'fixed-top', 'fa-frown-o' );
-                    }
-                }
-            });
+        if (typeof this.id != 'undefined') {
+          if (event.target.className) {
+              //format the div class to a valid topic..
+              var mqttTopic = "/" + event.target.className.replace(/[0-9]/g, function myFunction(x){return "/"+x;});
+              Meteor.call('mqtt.send',this._id,mqttTopic, function(error, result) {
+                  if (typeof error != 'undefined') { //we returned an error
+                      if (error.error === "not-authorized") {
+                          Bert.alert( 'Not-Authorized: You must be logged in to modify elements.', 'danger', 'fixed-top', 'fa-frown-o' );
+                      }
+                  }
+              });
+          }
         }
     },
 });
