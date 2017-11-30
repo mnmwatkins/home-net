@@ -5,7 +5,7 @@
 # but you can also edit it by hand.
 
 meteor-base@1.1.0             # Packages every Meteor app needs to have
-mobile-experience@1.0.4       # Packages for a great mobile UX
+mobile-experience@1.0.5       # Packages for a great mobile UX
 mongo@1.2.2                   # The database Meteor supports right now
 blaze-html-templates@1.0.4 # Compile .html files into Meteor Blaze views
 reactive-var@1.0.11            # Reactive variable for tracker
@@ -27,5 +27,5 @@ ian:accounts-ui-bootstrap-3
 iron:router
 session@1.1.7
 epaminond:nodemailer
-dynamic-import@0.1.1
+dynamic-import@0.1.3
 themeteorchef:bert
